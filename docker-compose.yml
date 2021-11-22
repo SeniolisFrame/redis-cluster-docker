@@ -5,52 +5,83 @@ services:
     image: redis:6-alpine
     container_name: redis-1
     restart: always
-    network_mode: "host"
+    ports:
+      - 7000:7000
     volumes:
       - ./redis-1/redis.conf:/usr/local/etc/redis/redis.conf
     command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    networks:
+      app_net:
+        ipv4_address: 192.168.1.4
   # redis2 configuration
   redis2:
     image: redis:6-alpine
     container_name: redis-2
     restart: always
-    network_mode: "host"
+    ports:
+      - 7001:7001
     volumes:
       - ./redis-2/redis.conf:/usr/local/etc/redis/redis.conf
     command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    networks:
+      app_net:
+        ipv4_address: 192.168.1.5
   # redis3 configuration
   redis3:
     image: redis:6-alpine
     container_name: redis-3
     restart: always
-    network_mode: "host"
+    ports:
+      - 7002:7002
     volumes:
       - ./redis-3/redis.conf:/usr/local/etc/redis/redis.conf
     command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    networks:
+      app_net:
+        ipv4_address: 192.168.1.6
   # redis4 configuration
   redis4:
     image: redis:6-alpine
     container_name: redis-4
     restart: always
-    network_mode: "host"
+    ports:
+      - 7003:7003
     volumes:
       - ./redis-4/redis.conf:/usr/local/etc/redis/redis.conf
     command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    networks:
+      app_net:
+        ipv4_address: 192.168.1.7
   # redis5 configuration
   redis5:
     image: redis:6-alpine
     container_name: redis-5
     restart: always
-    network_mode: "host"
+    ports:
+      - 7004:7004
     volumes:
       - ./redis-5/redis.conf:/usr/local/etc/redis/redis.conf
     command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    networks:
+      app_net:
+        ipv4_address: 192.168.1.8
   # redis6 configuration
   redis6:
     image: redis:6-alpine
     container_name: redis-6
     restart: always
-    network_mode: "host"
+    ports:
+      - 7005:7005
     volumes:
       - ./redis-6/redis.conf:/usr/local/etc/redis/redis.conf
     command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    networks:
+      app_net:
+        ipv4_address: 192.168.1.9
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.0/16
